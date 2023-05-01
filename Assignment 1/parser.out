@@ -1,0 +1,630 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    POSTFIX
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> PREFIX LPAREN prefix RPAREN
+Rule 2     start -> ID ASSIGN expression
+Rule 3     start -> expression
+Rule 4     prefix -> NUMBER PLUS NUMBER
+Rule 5     expression -> subexpression EQUALS subexpression
+Rule 6     expression -> subexpression
+Rule 7     subexpression -> subexpression PLUS term
+Rule 8     subexpression -> subexpression MINUS term
+Rule 9     subexpression -> term
+Rule 10    term -> term TIMES factor
+Rule 11    term -> term DIVIDE factor
+Rule 12    term -> term MOD factor
+Rule 13    term -> factor
+Rule 14    factor -> pow EXP factor
+Rule 15    factor -> pow
+Rule 16    pow -> NUMBER
+Rule 17    pow -> ID
+Rule 18    pow -> MINUS pow
+Rule 19    pow -> LPAREN expression RPAREN
+
+Terminals, with rules where they appear
+
+ASSIGN               : 2
+DIVIDE               : 11
+EQUALS               : 5
+EXP                  : 14
+ID                   : 2 17
+LPAREN               : 1 19
+MINUS                : 8 18
+MOD                  : 12
+NUMBER               : 4 4 16
+PLUS                 : 4 7
+POSTFIX              : 
+PREFIX               : 1
+RPAREN               : 1 19
+TIMES                : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 2 3 19
+factor               : 10 11 12 13 14
+pow                  : 14 15 18
+prefix               : 1
+start                : 0
+subexpression        : 5 5 6 7 8
+term                 : 7 8 9 10 11 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . PREFIX LPAREN prefix RPAREN
+    (2) start -> . ID ASSIGN expression
+    (3) start -> . expression
+    (5) expression -> . subexpression EQUALS subexpression
+    (6) expression -> . subexpression
+    (7) subexpression -> . subexpression PLUS term
+    (8) subexpression -> . subexpression MINUS term
+    (9) subexpression -> . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term MOD factor
+    (13) term -> . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    PREFIX          shift and go to state 2
+    ID              shift and go to state 4
+    NUMBER          shift and go to state 11
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    start                          shift and go to state 1
+    expression                     shift and go to state 5
+    subexpression                  shift and go to state 6
+    term                           shift and go to state 7
+    factor                         shift and go to state 9
+    pow                            shift and go to state 10
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (1) start -> PREFIX . LPAREN prefix RPAREN
+
+    LPAREN          shift and go to state 12
+
+
+state 3
+
+    (19) pow -> LPAREN . expression RPAREN
+    (5) expression -> . subexpression EQUALS subexpression
+    (6) expression -> . subexpression
+    (7) subexpression -> . subexpression PLUS term
+    (8) subexpression -> . subexpression MINUS term
+    (9) subexpression -> . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term MOD factor
+    (13) term -> . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    expression                     shift and go to state 13
+    subexpression                  shift and go to state 6
+    term                           shift and go to state 7
+    factor                         shift and go to state 9
+    pow                            shift and go to state 10
+
+state 4
+
+    (2) start -> ID . ASSIGN expression
+    (17) pow -> ID .
+
+    ASSIGN          shift and go to state 15
+    EXP             reduce using rule 17 (pow -> ID .)
+    TIMES           reduce using rule 17 (pow -> ID .)
+    DIVIDE          reduce using rule 17 (pow -> ID .)
+    MOD             reduce using rule 17 (pow -> ID .)
+    EQUALS          reduce using rule 17 (pow -> ID .)
+    PLUS            reduce using rule 17 (pow -> ID .)
+    MINUS           reduce using rule 17 (pow -> ID .)
+    $end            reduce using rule 17 (pow -> ID .)
+
+
+state 5
+
+    (3) start -> expression .
+
+    $end            reduce using rule 3 (start -> expression .)
+
+
+state 6
+
+    (5) expression -> subexpression . EQUALS subexpression
+    (6) expression -> subexpression .
+    (7) subexpression -> subexpression . PLUS term
+    (8) subexpression -> subexpression . MINUS term
+
+    EQUALS          shift and go to state 16
+    $end            reduce using rule 6 (expression -> subexpression .)
+    RPAREN          reduce using rule 6 (expression -> subexpression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+
+
+state 7
+
+    (9) subexpression -> term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . MOD factor
+
+    EQUALS          reduce using rule 9 (subexpression -> term .)
+    PLUS            reduce using rule 9 (subexpression -> term .)
+    MINUS           reduce using rule 9 (subexpression -> term .)
+    $end            reduce using rule 9 (subexpression -> term .)
+    RPAREN          reduce using rule 9 (subexpression -> term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    MOD             shift and go to state 21
+
+
+state 8
+
+    (18) pow -> MINUS . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    pow                            shift and go to state 22
+
+state 9
+
+    (13) term -> factor .
+
+    TIMES           reduce using rule 13 (term -> factor .)
+    DIVIDE          reduce using rule 13 (term -> factor .)
+    MOD             reduce using rule 13 (term -> factor .)
+    EQUALS          reduce using rule 13 (term -> factor .)
+    PLUS            reduce using rule 13 (term -> factor .)
+    MINUS           reduce using rule 13 (term -> factor .)
+    $end            reduce using rule 13 (term -> factor .)
+    RPAREN          reduce using rule 13 (term -> factor .)
+
+
+state 10
+
+    (14) factor -> pow . EXP factor
+    (15) factor -> pow .
+
+    EXP             shift and go to state 23
+    TIMES           reduce using rule 15 (factor -> pow .)
+    DIVIDE          reduce using rule 15 (factor -> pow .)
+    MOD             reduce using rule 15 (factor -> pow .)
+    EQUALS          reduce using rule 15 (factor -> pow .)
+    PLUS            reduce using rule 15 (factor -> pow .)
+    MINUS           reduce using rule 15 (factor -> pow .)
+    $end            reduce using rule 15 (factor -> pow .)
+    RPAREN          reduce using rule 15 (factor -> pow .)
+
+
+state 11
+
+    (16) pow -> NUMBER .
+
+    EXP             reduce using rule 16 (pow -> NUMBER .)
+    TIMES           reduce using rule 16 (pow -> NUMBER .)
+    DIVIDE          reduce using rule 16 (pow -> NUMBER .)
+    MOD             reduce using rule 16 (pow -> NUMBER .)
+    EQUALS          reduce using rule 16 (pow -> NUMBER .)
+    PLUS            reduce using rule 16 (pow -> NUMBER .)
+    MINUS           reduce using rule 16 (pow -> NUMBER .)
+    $end            reduce using rule 16 (pow -> NUMBER .)
+    RPAREN          reduce using rule 16 (pow -> NUMBER .)
+
+
+state 12
+
+    (1) start -> PREFIX LPAREN . prefix RPAREN
+    (4) prefix -> . NUMBER PLUS NUMBER
+
+    NUMBER          shift and go to state 25
+
+    prefix                         shift and go to state 24
+
+state 13
+
+    (19) pow -> LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 26
+
+
+state 14
+
+    (17) pow -> ID .
+
+    EXP             reduce using rule 17 (pow -> ID .)
+    TIMES           reduce using rule 17 (pow -> ID .)
+    DIVIDE          reduce using rule 17 (pow -> ID .)
+    MOD             reduce using rule 17 (pow -> ID .)
+    EQUALS          reduce using rule 17 (pow -> ID .)
+    PLUS            reduce using rule 17 (pow -> ID .)
+    MINUS           reduce using rule 17 (pow -> ID .)
+    RPAREN          reduce using rule 17 (pow -> ID .)
+    $end            reduce using rule 17 (pow -> ID .)
+
+
+state 15
+
+    (2) start -> ID ASSIGN . expression
+    (5) expression -> . subexpression EQUALS subexpression
+    (6) expression -> . subexpression
+    (7) subexpression -> . subexpression PLUS term
+    (8) subexpression -> . subexpression MINUS term
+    (9) subexpression -> . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term MOD factor
+    (13) term -> . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    expression                     shift and go to state 27
+    subexpression                  shift and go to state 6
+    term                           shift and go to state 7
+    factor                         shift and go to state 9
+    pow                            shift and go to state 10
+
+state 16
+
+    (5) expression -> subexpression EQUALS . subexpression
+    (7) subexpression -> . subexpression PLUS term
+    (8) subexpression -> . subexpression MINUS term
+    (9) subexpression -> . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term MOD factor
+    (13) term -> . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    subexpression                  shift and go to state 28
+    term                           shift and go to state 7
+    factor                         shift and go to state 9
+    pow                            shift and go to state 10
+
+state 17
+
+    (7) subexpression -> subexpression PLUS . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term MOD factor
+    (13) term -> . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    term                           shift and go to state 29
+    factor                         shift and go to state 9
+    pow                            shift and go to state 10
+
+state 18
+
+    (8) subexpression -> subexpression MINUS . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term MOD factor
+    (13) term -> . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    term                           shift and go to state 30
+    factor                         shift and go to state 9
+    pow                            shift and go to state 10
+
+state 19
+
+    (10) term -> term TIMES . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    factor                         shift and go to state 31
+    pow                            shift and go to state 10
+
+state 20
+
+    (11) term -> term DIVIDE . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    factor                         shift and go to state 32
+    pow                            shift and go to state 10
+
+state 21
+
+    (12) term -> term MOD . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    factor                         shift and go to state 33
+    pow                            shift and go to state 10
+
+state 22
+
+    (18) pow -> MINUS pow .
+
+    EXP             reduce using rule 18 (pow -> MINUS pow .)
+    TIMES           reduce using rule 18 (pow -> MINUS pow .)
+    DIVIDE          reduce using rule 18 (pow -> MINUS pow .)
+    MOD             reduce using rule 18 (pow -> MINUS pow .)
+    EQUALS          reduce using rule 18 (pow -> MINUS pow .)
+    PLUS            reduce using rule 18 (pow -> MINUS pow .)
+    MINUS           reduce using rule 18 (pow -> MINUS pow .)
+    $end            reduce using rule 18 (pow -> MINUS pow .)
+    RPAREN          reduce using rule 18 (pow -> MINUS pow .)
+
+
+state 23
+
+    (14) factor -> pow EXP . factor
+    (14) factor -> . pow EXP factor
+    (15) factor -> . pow
+    (16) pow -> . NUMBER
+    (17) pow -> . ID
+    (18) pow -> . MINUS pow
+    (19) pow -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    ID              shift and go to state 14
+    MINUS           shift and go to state 8
+    LPAREN          shift and go to state 3
+
+    pow                            shift and go to state 10
+    factor                         shift and go to state 34
+
+state 24
+
+    (1) start -> PREFIX LPAREN prefix . RPAREN
+
+    RPAREN          shift and go to state 35
+
+
+state 25
+
+    (4) prefix -> NUMBER . PLUS NUMBER
+
+    PLUS            shift and go to state 36
+
+
+state 26
+
+    (19) pow -> LPAREN expression RPAREN .
+
+    EXP             reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    MOD             reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    EQUALS          reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    $end            reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 19 (pow -> LPAREN expression RPAREN .)
+
+
+state 27
+
+    (2) start -> ID ASSIGN expression .
+
+    $end            reduce using rule 2 (start -> ID ASSIGN expression .)
+
+
+state 28
+
+    (5) expression -> subexpression EQUALS subexpression .
+    (7) subexpression -> subexpression . PLUS term
+    (8) subexpression -> subexpression . MINUS term
+
+    $end            reduce using rule 5 (expression -> subexpression EQUALS subexpression .)
+    RPAREN          reduce using rule 5 (expression -> subexpression EQUALS subexpression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+
+
+state 29
+
+    (7) subexpression -> subexpression PLUS term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . MOD factor
+
+    EQUALS          reduce using rule 7 (subexpression -> subexpression PLUS term .)
+    PLUS            reduce using rule 7 (subexpression -> subexpression PLUS term .)
+    MINUS           reduce using rule 7 (subexpression -> subexpression PLUS term .)
+    $end            reduce using rule 7 (subexpression -> subexpression PLUS term .)
+    RPAREN          reduce using rule 7 (subexpression -> subexpression PLUS term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    MOD             shift and go to state 21
+
+
+state 30
+
+    (8) subexpression -> subexpression MINUS term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . MOD factor
+
+    EQUALS          reduce using rule 8 (subexpression -> subexpression MINUS term .)
+    PLUS            reduce using rule 8 (subexpression -> subexpression MINUS term .)
+    MINUS           reduce using rule 8 (subexpression -> subexpression MINUS term .)
+    $end            reduce using rule 8 (subexpression -> subexpression MINUS term .)
+    RPAREN          reduce using rule 8 (subexpression -> subexpression MINUS term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    MOD             shift and go to state 21
+
+
+state 31
+
+    (10) term -> term TIMES factor .
+
+    TIMES           reduce using rule 10 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 10 (term -> term TIMES factor .)
+    MOD             reduce using rule 10 (term -> term TIMES factor .)
+    EQUALS          reduce using rule 10 (term -> term TIMES factor .)
+    PLUS            reduce using rule 10 (term -> term TIMES factor .)
+    MINUS           reduce using rule 10 (term -> term TIMES factor .)
+    $end            reduce using rule 10 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 10 (term -> term TIMES factor .)
+
+
+state 32
+
+    (11) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 11 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 11 (term -> term DIVIDE factor .)
+    MOD             reduce using rule 11 (term -> term DIVIDE factor .)
+    EQUALS          reduce using rule 11 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 11 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 11 (term -> term DIVIDE factor .)
+    $end            reduce using rule 11 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 11 (term -> term DIVIDE factor .)
+
+
+state 33
+
+    (12) term -> term MOD factor .
+
+    TIMES           reduce using rule 12 (term -> term MOD factor .)
+    DIVIDE          reduce using rule 12 (term -> term MOD factor .)
+    MOD             reduce using rule 12 (term -> term MOD factor .)
+    EQUALS          reduce using rule 12 (term -> term MOD factor .)
+    PLUS            reduce using rule 12 (term -> term MOD factor .)
+    MINUS           reduce using rule 12 (term -> term MOD factor .)
+    $end            reduce using rule 12 (term -> term MOD factor .)
+    RPAREN          reduce using rule 12 (term -> term MOD factor .)
+
+
+state 34
+
+    (14) factor -> pow EXP factor .
+
+    TIMES           reduce using rule 14 (factor -> pow EXP factor .)
+    DIVIDE          reduce using rule 14 (factor -> pow EXP factor .)
+    MOD             reduce using rule 14 (factor -> pow EXP factor .)
+    EQUALS          reduce using rule 14 (factor -> pow EXP factor .)
+    PLUS            reduce using rule 14 (factor -> pow EXP factor .)
+    MINUS           reduce using rule 14 (factor -> pow EXP factor .)
+    $end            reduce using rule 14 (factor -> pow EXP factor .)
+    RPAREN          reduce using rule 14 (factor -> pow EXP factor .)
+
+
+state 35
+
+    (1) start -> PREFIX LPAREN prefix RPAREN .
+
+    $end            reduce using rule 1 (start -> PREFIX LPAREN prefix RPAREN .)
+
+
+state 36
+
+    (4) prefix -> NUMBER PLUS . NUMBER
+
+    NUMBER          shift and go to state 37
+
+
+state 37
+
+    (4) prefix -> NUMBER PLUS NUMBER .
+
+    RPAREN          reduce using rule 4 (prefix -> NUMBER PLUS NUMBER .)
+
